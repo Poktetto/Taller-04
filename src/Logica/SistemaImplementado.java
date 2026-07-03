@@ -3,8 +3,9 @@ package Logica;
 import java.util.ArrayList;
 import java.util.List;
 import Dominio.*;
+import GUI.*;
 
-public class SistemaImplentado implements Sistema{
+public class SistemaImplementado implements Sistema{
 	//Creacion de variables estaticas
 	private static Sistema instancia; //para el Singleton
 	private static List<Carta> deck = new ArrayList<>();
@@ -13,7 +14,7 @@ public class SistemaImplentado implements Sistema{
 	private void SistemaImplentado() {}
 	public static Sistema getInstance() {
 		if (instancia==null) {
-			instancia= new SistemaImplentado();
+			instancia= new SistemaImplementado();
 		}
 		return instancia;
 	}
@@ -23,5 +24,11 @@ public class SistemaImplentado implements Sistema{
 		deck.add(factory.fabricarCarta(linea));
 		
 	}
+	@Override
+	public void crearGUI() {
+		GUI gui = new GUI();
+		
+	}
+	
 
 }

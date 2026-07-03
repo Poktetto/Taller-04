@@ -4,10 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+
+
 public class App {
-	private static Sistema sistema = SistemaImplentado.getInstance();
+	private static Sistema sistema = SistemaImplementado.getInstance();
 	public static void main(String[] args) throws IOException {
 		cargarSobres();
+		cargarGUI();
+	}
+
+	private static void cargarGUI() {
+		sistema.crearGUI();		
 	}
 
 	private static void cargarSobres() throws IOException {
