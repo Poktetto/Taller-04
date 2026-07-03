@@ -8,16 +8,18 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import javax.swing.SwingConstants;
 import Logica.SistemaImplementado;
 import Logica.Sistema;
 
 public class GUI {
+	private static int ultimaCarta;
 	private static Sistema sistema =SistemaImplementado.getInstance(); //no estoy muy seguro pero creo que es asi
 	public GUI(){
 		JFrame ventana = new JFrame("Administrador de Cartas");
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setSize(500, 600);
+		ventana.setSize(300, 100);
 		ventana.setLocationRelativeTo(null);
 		ventana.getContentPane().add(crearGui(ventana));
 		ventana.setVisible(true);
@@ -36,49 +38,103 @@ public class GUI {
 		botonera.add(coleccion);
 		
 		panelPrincipal.add(titulo,BorderLayout.NORTH);
-		panelPrincipal.add(botonera,BorderLayout.SOUTH);
+		panelPrincipal.add(botonera,BorderLayout.CENTER);
 		return panelPrincipal;
 	}
 
 	private JButton botonColec(JFrame ventana) {
 		JButton b = new JButton("Ver Coleccion");
 		b.addActionListener(e->{
-			ventana.getContentPane().removeAll();
+			JDialog ventanaColeccion = new JDialog(ventana,"Coleccion");
+			ventanaColeccion.setSize(500,700);
+			ventanaColeccion.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
 			JLabel titulo = new JLabel("~~~ Coleccion 🎴~~~",SwingConstants.CENTER); 
 			JPanel botonera = new JPanel();
-			JPanel texto = new JPanel(); //para la impresion de las Cartas
+			
+			
+			
+			JPanel texto = new JPanel(); //para la impresion de las Carta
 			texto.setLayout(new BoxLayout(texto,BoxLayout.Y_AXIS));
+			
+			ultimaCarta= 0;
 			mostrarCartas(texto, ventana);
+		
 			
-			
+			JButton regresar = regresarColec(texto, ventana);
 			JButton b1= new JButton("HacerDespues");
 			JButton b2= new JButton("HacerDespues");
 			JButton b3= new JButton("HacerDespues");
-			JButton b4 = volver(ventana);
+			JButton avanzar = avanzarColec(texto, ventana);
 			
+			botonera.add(regresar);
 			botonera.add(b1);
 			botonera.add(b2);
 			botonera.add(b3);
-			botonera.add(b4); //volver
+			botonera.add(avanzar);
 			
-			ventana.add(titulo,BorderLayout.NORTH);
-			ventana.add(botonera, BorderLayout.SOUTH);
-			ventana.add(texto, BorderLayout.CENTER);
 			
-			ventana.getContentPane().revalidate();
-			ventana.getContentPane().repaint();
+			ventanaColeccion.add(titulo,BorderLayout.NORTH);
+			ventanaColeccion.add(botonera, BorderLayout.SOUTH);
+			ventanaColeccion.add(texto, BorderLayout.CENTER);
+			
+			ventanaColeccion.setVisible(true);
 		});
 		return b;
 	}
-	private void mostrarCartas(JPanel texto, JFrame ventana) {
-		texto.removeAll();
+	private JButton avanzarColec(JPanel texto, JFrame ventana) {
+		JButton b = new JButton(">");
+		b.addActionListener(e->{
+			mostrarCartas(texto, ventana);
+		});
+		return b;
+	}
+
+	private JButton regresarColec(JPanel texto, JFrame ventana) {
+		JButton b = new JButton("🏠");
+		b.addActionListener(e->{
+			regresarCartas(texto, ventana);
+		});
+		return b;
+	}
+
+	private void regresarCartas(JPanel texto, JFrame ventana) {
+	texto.removeAll();
+		ultimaCarta=0;
+		
+	
 		for (int i =0;i<sistema.verCantCartas();i++) {
-			String lineaMostrar=sistema.verCarta(i);
+			
+			
 			JButton b = cartaSingular(i, ventana);
 			b.setAlignmentX(Component.CENTER_ALIGNMENT);
 			texto.add(b);
-			i++;
+			if (i>ultimaCarta+20) {
+				ultimaCarta=i;
+				break;
+			}
+			
+		}
+		texto.revalidate();
+		texto.repaint();
+	}
+
+	private void mostrarCartas(JPanel texto, JFrame ventana) {
+		texto.removeAll();
+		
+		
+	
+		for (int i =ultimaCarta;i<sistema.verCantCartas();i++) {
+			
+			
+			JButton b = cartaSingular(i, ventana);
+			b.setAlignmentX(Component.CENTER_ALIGNMENT);
+			texto.add(b);
+			if (i>ultimaCarta+20) {
+				ultimaCarta=i;
+				break;
+			}
+			
 		}
 		texto.revalidate();
 		texto.repaint();
@@ -98,36 +154,28 @@ public class GUI {
 		return b;
 	}
 
-	private JButton volver(JFrame ventana) {
-		JButton b = new JButton("Volver ↩️");
-		b.addActionListener(e->{
-			//limpia y recrea el GUI
-			ventana.getContentPane().removeAll();
-			ventana.getContentPane().add(crearGui(ventana)); 
-			ventana.getContentPane().revalidate(); 
-			ventana.getContentPane().repaint();
-		});
-		return b;
-	}
+
 	private JButton botonAdmin(JFrame ventana) {
-		
+
 		JButton b = new JButton("Administrar");
 		b.addActionListener(e->{
-			ventana.getContentPane().removeAll();
+			JDialog ventanaAdmin = new JDialog(ventana,"Administrar");
+			ventanaAdmin.setSize(500,700);
+			ventanaAdmin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+			
 			JPanel botonera = new JPanel();
 			
 			JButton b1= agregarCarta(ventana);
 			JButton b2= eliminarCarta();
 			JButton b3= modificarCarta();
-			JButton b4 = volver(ventana);
 			botonera.add(b1);
 			botonera.add(b2);
 			botonera.add(b3);
-			botonera.add(b4);
-			ventana.add(botonera, BorderLayout.SOUTH);
 			
-			ventana.getContentPane().revalidate();
-			ventana.getContentPane().repaint();
+			ventanaAdmin.add(botonera,BorderLayout.SOUTH);
+			ventanaAdmin.setVisible(true);
+			
 		});
 		
 		return b;
@@ -166,6 +214,8 @@ public class GUI {
 			ventanaDialog.setLocationRelativeTo(null); //para que salga en el centro
 
 			ventanaDialog.setVisible(true);
+			
+
 			
 		});
 		
