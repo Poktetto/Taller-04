@@ -8,7 +8,7 @@ import GUI.*;
 public class SistemaImplementado implements Sistema{
 	//Creacion de variables estaticas
 	private static Sistema instancia; //para el Singleton
-	private static List<Carta> deck = new ArrayList<>();
+	private static List<Carta> cartas = new ArrayList<>();
 	
 	
 	private void SistemaImplentado() {}
@@ -21,7 +21,7 @@ public class SistemaImplementado implements Sistema{
 	@Override
 	public void crearSobres(String linea) {
 		CartasFactory factory = new CartasFactory();
-		deck.add(factory.fabricarCarta(linea));
+		cartas.add(factory.fabricarCarta(linea));
 		
 	}
 	@Override
@@ -29,6 +29,19 @@ public class SistemaImplementado implements Sistema{
 		GUI gui = new GUI();
 		
 	}
+	@Override
+	public int verCantCartas() {
+		return cartas.size();
+	}
+	@Override
+	public String verCarta(int i) {
+		return cartas.get(i).toString();
+	}
+	@Override
+	public String verNombreCarta(int i) {
+		return cartas.get(i).getNombre();
+	}
+	
 	
 
 }

@@ -11,6 +11,12 @@ public abstract class Carta {
 		this.nombre = nombre;
 		this.rareza = rareza;
 	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+	
 	
 	
 }

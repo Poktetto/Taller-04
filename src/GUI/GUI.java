@@ -1,11 +1,7 @@
 package GUI;
-import Dominio.*;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.util.List;
-
-import javax.security.auth.callback.TextOutputCallback;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -48,9 +44,13 @@ public class GUI {
 		JButton b = new JButton("Ver Coleccion");
 		b.addActionListener(e->{
 			ventana.getContentPane().removeAll();
+			
+			JLabel titulo = new JLabel("~~~ Coleccion 🎴~~~",SwingConstants.CENTER); 
 			JPanel botonera = new JPanel();
 			JPanel texto = new JPanel(); //para la impresion de las Cartas
 			texto.setLayout(new BoxLayout(texto,BoxLayout.Y_AXIS));
+			mostrarCartas(texto, ventana);
+			
 			
 			JButton b1= new JButton("HacerDespues");
 			JButton b2= new JButton("HacerDespues");
@@ -62,6 +62,7 @@ public class GUI {
 			botonera.add(b3);
 			botonera.add(b4); //volver
 			
+			ventana.add(titulo,BorderLayout.NORTH);
 			ventana.add(botonera, BorderLayout.SOUTH);
 			ventana.add(texto, BorderLayout.CENTER);
 			
@@ -70,6 +71,33 @@ public class GUI {
 		});
 		return b;
 	}
+	private void mostrarCartas(JPanel texto, JFrame ventana) {
+		texto.removeAll();
+		for (int i =0;i<sistema.verCantCartas();i++) {
+			String lineaMostrar=sistema.verCarta(i);
+			JButton b = cartaSingular(i, ventana);
+			b.setAlignmentX(Component.CENTER_ALIGNMENT);
+			texto.add(b);
+			i++;
+		}
+		texto.revalidate();
+		texto.repaint();
+	}
+
+	private JButton cartaSingular(int i, JFrame ventana) {
+		JButton b = new JButton(sistema.verNombreCarta(i));
+		b.addActionListener(e->{
+			JDialog ventanaDialog = new JDialog(ventana, sistema.verNombreCarta(i));
+			ventanaDialog.setSize(700,400);
+			
+			ventanaDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			ventanaDialog.setLocationRelativeTo(null); 
+
+			ventanaDialog.setVisible(true);
+		});
+		return b;
+	}
+
 	private JButton volver(JFrame ventana) {
 		JButton b = new JButton("Volver ↩️");
 		b.addActionListener(e->{
