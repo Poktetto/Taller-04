@@ -46,7 +46,7 @@ public class GUI {
 		JButton b = new JButton("Ver Coleccion");
 		b.addActionListener(e->{
 			JDialog ventanaColeccion = new JDialog(ventana,"Coleccion");
-			ventanaColeccion.setSize(500,700);
+			ventanaColeccion.setSize(600,700);
 			ventanaColeccion.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
 			JLabel titulo = new JLabel("~~~ Coleccion 🎴~~~",SwingConstants.CENTER); 
@@ -61,10 +61,10 @@ public class GUI {
 			mostrarCartas(texto, ventana);
 		
 			
-			JButton regresar = regresarColec(texto, ventana);
-			JButton b1= new JButton("HacerDespues");
-			JButton b2= new JButton("HacerDespues");
-			JButton b3= new JButton("HacerDespues");
+			JButton regresar = reiniciarColec(texto, ventana);
+			JButton b1= ordenarRareza(texto,ventana);
+			JButton b2= ordenarNombre(texto,ventana);
+			JButton b3= ordenarPoder(texto,ventana);
 			JButton avanzar = avanzarColec(texto, ventana);
 			
 			botonera.add(regresar);
@@ -82,6 +82,33 @@ public class GUI {
 		});
 		return b;
 	}
+	private JButton ordenarPoder(JPanel texto, JFrame ventana) {
+		JButton b = new JButton("Ordenar por Poder");
+		b.addActionListener(e->{
+			sistema.odenarCartasPoder();
+			inicioCartas(texto, ventana);
+		});
+		return b;
+	}
+
+	private JButton ordenarNombre(JPanel texto, JFrame ventana) {
+		JButton b = new JButton("Ordenar por Nombre");
+		b.addActionListener(e->{
+			//hacer el ordenamiento
+			inicioCartas(texto, ventana);
+		});
+		return b;
+	}
+
+	private JButton ordenarRareza(JPanel texto, JFrame ventana) {
+		JButton b = new JButton("Ordenar por Rareza");
+		b.addActionListener(e->{
+			sistema.ordenarCartasRareza();
+			inicioCartas(texto, ventana);
+		});
+		return b;
+	}
+
 	private JButton avanzarColec(JPanel texto, JFrame ventana) {
 		JButton b = new JButton(">");
 		b.addActionListener(e->{
@@ -90,15 +117,15 @@ public class GUI {
 		return b;
 	}
 
-	private JButton regresarColec(JPanel texto, JFrame ventana) {
+	private JButton reiniciarColec(JPanel texto, JFrame ventana) {
 		JButton b = new JButton("🏠");
 		b.addActionListener(e->{
-			regresarCartas(texto, ventana);
+			inicioCartas(texto, ventana);
 		});
 		return b;
 	}
 
-	private void regresarCartas(JPanel texto, JFrame ventana) {
+	private void inicioCartas(JPanel texto, JFrame ventana) {
 	texto.removeAll();
 		ultimaCarta=0;
 		
@@ -149,11 +176,33 @@ public class GUI {
 			ventanaDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			ventanaDialog.setLocationRelativeTo(null); 
 
+			
+			JPanel datos = new JPanel();
+			datos.setLayout(new BoxLayout(datos,BoxLayout.Y_AXIS));
+			datos=cargarDatos(datos,i);
+			ventanaDialog.add(datos,BorderLayout.EAST);
+			
+			
 			ventanaDialog.setVisible(true);
 		});
 		return b;
 	}
 
+
+	private JPanel cargarDatos(JPanel datos, int i) {
+		String[] stringDatos = sistema.verCarta(i).split(";");
+
+		for (int j=0; j<stringDatos.length;j++) {
+			
+			JLabel texto = new JLabel(stringDatos[j]+"      ");
+			JLabel espacio = new JLabel(" ");
+			
+			
+			datos.add(texto);
+			datos.add(espacio);
+		}
+		return datos;
+	}
 
 	private JButton botonAdmin(JFrame ventana) {
 

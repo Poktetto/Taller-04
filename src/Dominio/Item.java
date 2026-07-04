@@ -7,5 +7,13 @@ public class Item extends Carta {
 		super(nombre, rareza, tipo);
 		this.bonificacion = bonificacion;
 	}
-
+	@Override
+	public String toString() {
+		return "---- "+nombre+"----;Rareza: "+ rareza+";Bonificacion: "+ bonificacion;
+	}
+	@Override
+	public String getDatos() {
+		return ""+bonificacion;
+	}
+	
 }

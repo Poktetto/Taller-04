@@ -7,5 +7,13 @@ public class Supporter extends Carta {
 		super(nombre, rareza, tipo);
 		this.efectosPorTurno = efectosPorTurno;
 	}
+	@Override
+	public String toString() {
+		return "---- "+nombre+"----;Rareza: "+ rareza +";Efectos Por Turno:  " + efectosPorTurno;
+	}
+	@Override
+	public String getDatos() {
+		return ""+efectosPorTurno;
+	}
 	
 }

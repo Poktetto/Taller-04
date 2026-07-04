@@ -8,6 +8,14 @@ public class Pokemon extends Carta {
 		this.danio = danio;
 		this.energia = energia;
 	}
+	@Override
+	public String toString() {
+		return "---- "+nombre+"----;Rareza: "+ rareza+";Daño: " +danio +";Cantidad de energias: " + energia;
+	}
+	@Override
+	public String getDatos() {
+		return danio+";"+energia;
+	}
 	
 	
 }
