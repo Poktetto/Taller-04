@@ -12,7 +12,7 @@ public class SistemaImplementado implements Sistema{
 	private static List<Carta> cartas = new ArrayList<>();
 	
 	
-	private void SistemaImplentado() {}
+	private void SistemaImplementado() {}
 	public static Sistema getInstance() {
 		if (instancia==null) {
 			instancia= new SistemaImplementado();
@@ -80,6 +80,11 @@ public class SistemaImplementado implements Sistema{
 			cartas.get(i).setPoder(contexto.ejecutar(cartas.get(i).getDatos()));
 		}
 
+		
+	}
+	@Override
+	public void eliminarCarta() {
+		// TODO Auto-generated method stub
 		
 	}
 }

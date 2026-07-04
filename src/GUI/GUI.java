@@ -10,8 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import javax.swing.SwingConstants;
-import Logica.SistemaImplementado;
+
 import Logica.Sistema;
+import Logica.SistemaImplementado;
 
 public class GUI {
 	private static int ultimaCarta;
@@ -178,6 +179,7 @@ public class GUI {
 
 			
 			JPanel datos = new JPanel();
+			datos.add(b);
 			datos.setLayout(new BoxLayout(datos,BoxLayout.Y_AXIS));
 			datos=cargarDatos(datos,i);
 			ventanaDialog.add(datos,BorderLayout.EAST);
@@ -216,11 +218,12 @@ public class GUI {
 			JPanel botonera = new JPanel();
 			
 			JButton b1= agregarCarta(ventana);
-			JButton b2= eliminarCarta();
-			JButton b3= modificarCarta();
+			JButton b2= eliminarCarta(ventana);
+			JButton b3= modificarCarta(ventana);
 			botonera.add(b1);
 			botonera.add(b2);
 			botonera.add(b3);
+		
 			
 			ventanaAdmin.add(botonera,BorderLayout.SOUTH);
 			ventanaAdmin.setVisible(true);
@@ -229,7 +232,7 @@ public class GUI {
 		
 		return b;
 	}
-	private JButton modificarCarta() {
+	private JButton modificarCarta(JFrame ventana) {
 		JButton b = new JButton("Modificar Carta");
 		b.addActionListener(e->{
 			
@@ -239,13 +242,46 @@ public class GUI {
 		return b;
 	}
 
-	private JButton eliminarCarta() {
+	private JButton eliminarCarta(JFrame ventana) {
 		JButton b = new JButton("Eliminar Carta");
 		b.addActionListener(e->{
-
+			JDialog ventanaDialog = new JDialog(ventana, "Eliminar Carta");
+			ventanaDialog.setSize(200,300);
+			
+			JLabel titulo = new JLabel("Elija su carta a eliminar ",SwingConstants.CENTER); //para que este constantemente en el centro
+			
+			ventanaDialog.add(titulo,BorderLayout.NORTH);
+			JPanel texto = new JPanel(); //para la impresion de las Carta
+			texto.setLayout(new BoxLayout(texto,BoxLayout.Y_AXIS));
+			
+			ultimaCarta=0;
+			
+		
+			for (int i =0;i<sistema.verCantCartas();i++) {
+				
+				
+				JButton a = cartaABorrar(i, ventana);
+				b.setAlignmentX(Component.CENTER_ALIGNMENT);
+				texto.add(b);
+				if (i>ultimaCarta+20) {
+					ultimaCarta=i;
+					break;
+				}
+				
+			}
+		
+			ventanaDialog.setVisible(true);
 			
 		});
 		
+		return b;
+	}
+
+	private JButton cartaABorrar(int i, JFrame ventana) {
+		JButton b = new JButton(sistema.verNombreCarta(i));
+		b.addActionListener(e->{
+			
+		});
 		return b;
 	}
 
@@ -255,13 +291,24 @@ public class GUI {
 			JDialog ventanaDialog = new JDialog(ventana, "Agregar Carta");
 			ventanaDialog.setSize(200,300);
 			
-			JLabel titulo = new JLabel("Agregar de cartas",SwingConstants.CENTER); //para que este constantemente en el centro
+			JLabel titulo = new JLabel("Elija su tipo de carta a agregar",SwingConstants.CENTER); //para que este constantemente en el centro
 			
 			ventanaDialog.add(titulo,BorderLayout.NORTH);
 			
+			JButton b1= new JButton("Pokemon");
+			JButton b2= new JButton("Item");
+			JButton b3= new JButton("Energy");
+			JButton b4= new JButton("Supporter");
+			
+			JPanel botonera = new JPanel();
+			botonera.add(b1);
+			botonera.add(b2);
+			botonera.add(b3);
+			botonera.add(b4);
+			
 			ventanaDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			ventanaDialog.setLocationRelativeTo(null); //para que salga en el centro
-
+			ventanaDialog.add(botonera,BorderLayout.CENTER);
 			ventanaDialog.setVisible(true);
 			
 

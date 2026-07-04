@@ -65,5 +65,7 @@ public interface Sistema {
 	 * - las cartas quedan con un poder guardado y se ordenan dependiendo de esto
 	 */
 	void odenarCartasPoder();
+	
+	void eliminarCarta();
 
 }
