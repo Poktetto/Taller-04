@@ -60,7 +60,7 @@ public class SistemaImplementado implements Sistema{
 	}
 	@Override
 	public void odenarCartasPoder() {
-		calcularPoder();
+		
 		for (int i=0;i<cartas.size()-1;i++) {
 			for (int j=0;j<cartas.size()-1;j++) {
 				if(cartas.get(j).getPoder()<cartas.get(j+1).getPoder()) {
@@ -73,7 +73,8 @@ public class SistemaImplementado implements Sistema{
 		}
 		
 	}
-	private void calcularPoder() {
+	@Override
+	public void calcularPoder() {
 		CalcularPoderContexto contexto = new CalcularPoderContexto();
 		for (int i =0;i<cartas.size();i++) {
 			contexto.setStrategy(cartas.get(i).getTipo());
@@ -82,9 +83,22 @@ public class SistemaImplementado implements Sistema{
 
 		
 	}
+	
 	@Override
 	public void eliminarCarta() {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public void ordenarCartasNombre() {
+		for (int i=0;i<cartas.size()-1;i++) {
+			for (int j=0;j<cartas.size()-1;j++) {
+				if(cartas.get(j).getNombre().compareToIgnoreCase(cartas.get(j+1).getNombre())>0) {
+					Carta temp = cartas.get(j);
+					cartas.set(j, cartas.get(j+1));
+					cartas.set(j+1, temp);
+				}
+			}
+		}
 	}
 }

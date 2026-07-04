@@ -11,7 +11,7 @@ public class Energy extends Carta {
 
 	@Override
 	public String toString() {
-		return "---- "+nombre+"----;Rareza: "+ rareza+";Elemento: "+ elemento;
+		return "---- "+nombre+"----;Tipo: "+tipo+";Rareza: "+ rareza+";Elemento: "+ elemento+";Poder: "+poder;
 	}
 	
 	

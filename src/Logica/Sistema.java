@@ -67,5 +67,7 @@ public interface Sistema {
 	void odenarCartasPoder();
 	
 	void eliminarCarta();
+	void ordenarCartasNombre();
+	void calcularPoder();
 
 }

@@ -2,7 +2,7 @@ package Strategy;
 
 public class CalcularPoderSupporter implements EstrategiaCalcularPoder {
 	@Override
-	public double calcularPoder(String datos) {
-		return (double) Integer.parseInt(datos)*50;
+	public int calcularPoder(String datos) {
+		return Integer.parseInt(datos)*50;
 	}
 }

@@ -15,7 +15,7 @@ public class CalcularPoderContexto {
 		}
 	}
 
-	public double ejecutar(String datos) {
+	public int ejecutar(String datos) {
 		return strategy.calcularPoder(datos);
 	}
 }

@@ -95,7 +95,7 @@ public class GUI {
 	private JButton ordenarNombre(JPanel texto, JFrame ventana) {
 		JButton b = new JButton("Ordenar por Nombre");
 		b.addActionListener(e->{
-			//hacer el ordenamiento
+			sistema.ordenarCartasNombre();
 			inicioCartas(texto, ventana);
 		});
 		return b;
@@ -179,7 +179,7 @@ public class GUI {
 
 			
 			JPanel datos = new JPanel();
-			datos.add(b);
+			//datos.add(b); Porque esta esto? 
 			datos.setLayout(new BoxLayout(datos,BoxLayout.Y_AXIS));
 			datos=cargarDatos(datos,i);
 			ventanaDialog.add(datos,BorderLayout.EAST);

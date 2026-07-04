@@ -9,7 +9,7 @@ public class Item extends Carta {
 	}
 	@Override
 	public String toString() {
-		return "---- "+nombre+"----;Rareza: "+ rareza+";Bonificacion: "+ bonificacion;
+		return "---- "+nombre+"----;Tipo: "+tipo+";Rareza: "+ rareza+";Bonificacion: "+ bonificacion+";Poder: "+poder;
 	}
 	@Override
 	public String getDatos() {

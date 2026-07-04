@@ -10,7 +10,7 @@ public class Pokemon extends Carta {
 	}
 	@Override
 	public String toString() {
-		return "---- "+nombre+"----;Rareza: "+ rareza+";Daño: " +danio +";Cantidad de energias: " + energia;
+		return "---- "+nombre+"----;Tipo:"+tipo+";Rareza: "+ rareza+";Daño: " +danio +";Cantidad de energias: " + energia+";Poder: "+poder;
 	}
 	@Override
 	public String getDatos() {

@@ -10,6 +10,7 @@ public class App {
 	private static Sistema sistema = SistemaImplementado.getInstance();
 	public static void main(String[] args) throws IOException {
 		cargarSobres();
+		sistema.calcularPoder();
 		cargarGUI();
 	}
 

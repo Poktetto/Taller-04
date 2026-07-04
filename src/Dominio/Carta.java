@@ -4,7 +4,7 @@ public abstract class Carta {
 	protected String nombre;
 	protected int rareza;
 	protected String tipo;
-	protected double poder;
+	protected int poder;
 	
 	
 	public Carta(String nombre, int rareza, String tipo) {
@@ -34,7 +34,7 @@ public abstract class Carta {
 	}
 
 
-	public void setPoder(double poder) {
+	public void setPoder(int poder) {
 		this.poder = poder;
 	}
 	public String getDatos() {

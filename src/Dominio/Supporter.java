@@ -9,7 +9,7 @@ public class Supporter extends Carta {
 	}
 	@Override
 	public String toString() {
-		return "---- "+nombre+"----;Rareza: "+ rareza +";Efectos Por Turno:  " + efectosPorTurno;
+		return "---- "+nombre+"----;Tipo: "+tipo+";Rareza: "+ rareza +";Efectos Por Turno:  " + efectosPorTurno+";Poder: "+poder;
 	}
 	@Override
 	public String getDatos() {

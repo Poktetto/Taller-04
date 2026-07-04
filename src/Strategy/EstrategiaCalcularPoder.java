@@ -10,5 +10,5 @@ public interface EstrategiaCalcularPoder {
 	 * @param datos los datos de la carta correspondientes para el calculo como String
 	 * @return un double que es el Poder de esa carta
 	 */
-	double calcularPoder(String datos);
+	int calcularPoder(String datos);
 }
