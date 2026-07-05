@@ -5,6 +5,7 @@ import java.util.List;
 import Dominio.*;
 import GUI.*;
 import Strategy.*;
+import Visitor.*;
 
 public class SistemaImplementado implements Sistema{
 	//Creacion de variables estaticas
@@ -24,6 +25,12 @@ public class SistemaImplementado implements Sistema{
 		CartasFactory factory = new CartasFactory();
 		cartas.add(factory.fabricarCarta(linea));
 		
+	}
+	public void agregarImagen() {
+		IVisitor visitor = new BuscarImagenVisitor();
+		for (Carta carta: cartas) {
+			carta.aceptar(visitor);
+		}
 	}
 	@Override
 	public void crearGUI() {

@@ -25,6 +25,7 @@ public class App {
 			String linea = sArc.nextLine();
 			sistema.crearSobres(linea);
 		}
+		sistema.agregarImagen();
 		
 		
 	}

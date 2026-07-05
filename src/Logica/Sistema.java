@@ -69,5 +69,6 @@ public interface Sistema {
 	void eliminarCarta();
 	void ordenarCartasNombre();
 	void calcularPoder();
+	void agregarImagen();
 
 }

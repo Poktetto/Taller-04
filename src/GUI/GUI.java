@@ -179,7 +179,7 @@ public class GUI {
 
 			
 			JPanel datos = new JPanel();
-			//datos.add(b); Porque esta esto? 
+			//datos.add(b); Porque esta esto? , nose :v , a lo mejor me confundi de metodo
 			datos.setLayout(new BoxLayout(datos,BoxLayout.Y_AXIS));
 			datos=cargarDatos(datos,i);
 			ventanaDialog.add(datos,BorderLayout.EAST);
@@ -235,11 +235,109 @@ public class GUI {
 	private JButton modificarCarta(JFrame ventana) {
 		JButton b = new JButton("Modificar Carta");
 		b.addActionListener(e->{
+			JDialog ventanaDialog = new JDialog(ventana, "Eliminar Carta");
+			ventanaDialog.setSize(200,300);
+			
+			JLabel titulo = new JLabel("Elija su carta a eliminar ",SwingConstants.CENTER); //para que este constantemente en el centro
+			
+			JPanel botonera = new JPanel();
+			botonera.setLayout(new BoxLayout(botonera,BoxLayout.X_AXIS));
+			
+			ventanaDialog.add(titulo,BorderLayout.NORTH);
+			JPanel texto = new JPanel(); //para la impresion de las Carta
+			texto.setLayout(new BoxLayout(texto,BoxLayout.Y_AXIS));
+			
+			ultimaCarta=0;
 			
 		
+			cargarEliminarCarta(ventana, texto);
+			
+			//carga la ventana con los pokemones 
+			JButton inicio = inicioModificarCarta(texto, ventana);
+			JButton avanzar = avanzarModificarCarta(texto,ventana);
+			botonera.add(inicio);
+			botonera.add(avanzar);
+			ventanaDialog.add(botonera,BorderLayout.SOUTH);
+			ventanaDialog.add(texto,BorderLayout.CENTER);
+			ventanaDialog.setVisible(true);
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		});
 		
 		return b;
+	}
+
+	private JButton avanzarModificarCarta(JPanel texto, JFrame ventana) {
+		JButton b = new JButton(">");
+		b.addActionListener(e->{
+			anvanzarPagModificarCarta(ventana, texto);
+		});
+		return b;
+	}
+
+	private void anvanzarPagModificarCarta(JFrame ventana, JPanel texto) {
+		texto.removeAll();
+		
+		for (int i =ultimaCarta;i<sistema.verCantCartas();i++) {
+			
+			JButton b = cartaABorrar(i, ventana);
+			b.setAlignmentX(Component.CENTER_ALIGNMENT);
+			texto.add(b);
+			if (i>ultimaCarta+20) {
+				ultimaCarta=i;
+				break;
+			}
+			
+		}
+		texto.revalidate();
+		texto.repaint();
+		
+	}
+
+	private JButton cartaAModificar(int i, JFrame ventana) {
+		JButton b = new JButton(sistema.verNombreCarta(i));
+		b.addActionListener(e->{
+			
+		});
+		return b;
+	}
+
+	private JButton inicioModificarCarta(JPanel texto, JFrame ventana) {
+		JButton b = new JButton("🏠");
+		b.addActionListener(e->{
+			cargarModificarCarta(ventana, texto);
+		});
+		return b;
+	}
+
+	private void cargarModificarCarta(JFrame ventana, JPanel texto) {
+		texto.removeAll();
+		ultimaCarta=0;
+		
+	
+		for (int i =0;i<sistema.verCantCartas();i++) {
+			
+			
+			JButton b = cartaABorrar(i, ventana);
+			b.setAlignmentX(Component.CENTER_ALIGNMENT);
+			texto.add(b);
+			if (i>ultimaCarta+20) {
+				ultimaCarta=i;
+				break;
+			}
+			
+		}
+		texto.revalidate();
+		texto.repaint();
 	}
 
 	private JButton eliminarCarta(JFrame ventana) {
@@ -250,6 +348,9 @@ public class GUI {
 			
 			JLabel titulo = new JLabel("Elija su carta a eliminar ",SwingConstants.CENTER); //para que este constantemente en el centro
 			
+			JPanel botonera = new JPanel();
+			botonera.setLayout(new BoxLayout(botonera,BoxLayout.X_AXIS));
+			
 			ventanaDialog.add(titulo,BorderLayout.NORTH);
 			JPanel texto = new JPanel(); //para la impresion de las Carta
 			texto.setLayout(new BoxLayout(texto,BoxLayout.Y_AXIS));
@@ -257,19 +358,15 @@ public class GUI {
 			ultimaCarta=0;
 			
 		
-			for (int i =0;i<sistema.verCantCartas();i++) {
-				
-				
-				JButton a = cartaABorrar(i, ventana);
-				b.setAlignmentX(Component.CENTER_ALIGNMENT);
-				texto.add(b);
-				if (i>ultimaCarta+20) {
-					ultimaCarta=i;
-					break;
-				}
-				
-			}
-		
+			cargarEliminarCarta(ventana, texto);
+			
+			//carga la ventana con los pokemones 
+			JButton inicio = inicioEliminarCarta(texto, ventana);
+			JButton avanzar = avanzarEliminarCarta(texto,ventana);
+			botonera.add(inicio);
+			botonera.add(avanzar);
+			ventanaDialog.add(botonera,BorderLayout.SOUTH);
+			ventanaDialog.add(texto,BorderLayout.CENTER);
 			ventanaDialog.setVisible(true);
 			
 		});
@@ -277,6 +374,62 @@ public class GUI {
 		return b;
 	}
 
+	private JButton avanzarEliminarCarta(JPanel texto, JFrame ventana) {
+		JButton b = new JButton(">");
+		b.addActionListener(e->{
+			anvanzarPagEliminarCarta(ventana, texto);
+		});
+		return b;
+	}
+	
+	private void anvanzarPagEliminarCarta(JFrame ventana, JPanel texto) {
+		texto.removeAll();
+	
+		for (int i =ultimaCarta;i<sistema.verCantCartas();i++) {
+			
+			JButton b = cartaABorrar(i, ventana);
+			b.setAlignmentX(Component.CENTER_ALIGNMENT);
+			texto.add(b);
+			if (i>ultimaCarta+20) {
+				ultimaCarta=i;
+				break;
+			}
+			
+		}
+		texto.revalidate();
+		texto.repaint();
+	
+	}
+	private JButton inicioEliminarCarta(JPanel texto, JFrame ventana) {
+		JButton b = new JButton("🏠");
+		b.addActionListener(e->{
+			cargarEliminarCarta(ventana, texto);
+		});
+		return b;
+	}
+	
+	private void cargarEliminarCarta(JFrame ventana, JPanel texto) {
+		texto.removeAll();
+		ultimaCarta=0;
+		
+	
+		for (int i =0;i<sistema.verCantCartas();i++) {
+			
+			
+			JButton b = cartaABorrar(i, ventana);
+			b.setAlignmentX(Component.CENTER_ALIGNMENT);
+			texto.add(b);
+			if (i>ultimaCarta+20) {
+				ultimaCarta=i;
+				break;
+			}
+			
+		}
+		texto.revalidate();
+		texto.repaint();
+	
+	}
+	
 	private JButton cartaABorrar(int i, JFrame ventana) {
 		JButton b = new JButton(sistema.verNombreCarta(i));
 		b.addActionListener(e->{

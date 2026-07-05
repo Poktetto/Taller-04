@@ -1,11 +1,11 @@
 package Dominio;
-
+import Visitor.*;
 public abstract class Carta {
 	protected String nombre;
 	protected int rareza;
 	protected String tipo;
 	protected int poder;
-	
+	protected String rutaImagen;
 	
 	public Carta(String nombre, int rareza, String tipo) {
 		this.tipo=tipo;
@@ -34,11 +34,25 @@ public abstract class Carta {
 	}
 
 
+	public String getRutaImagen() {
+		return rutaImagen;
+	}
+
+
+	public void setRutaImagen(String rutaImagen) {
+		this.rutaImagen = rutaImagen;
+	}
+
+
 	public void setPoder(int poder) {
 		this.poder = poder;
 	}
 	public String getDatos() {
 		return ""+1;
+	}
+	
+	public void aceptar(IVisitor visitante) {
+		visitante.visitar(this);
 	}
 	
 	
