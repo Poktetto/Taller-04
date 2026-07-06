@@ -3,6 +3,7 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -177,11 +178,13 @@ public class GUI {
 			ventanaDialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			ventanaDialog.setLocationRelativeTo(null); 
 
-			
+			ImageIcon imagen = new ImageIcon(sistema.verImagen(i));
+			JLabel imagenE = new JLabel(imagen); 
 			JPanel datos = new JPanel();
-			//datos.add(b); Porque esta esto? , nose :v , a lo mejor me confundi de metodo
+			
 			datos.setLayout(new BoxLayout(datos,BoxLayout.Y_AXIS));
 			datos=cargarDatos(datos,i);
+			ventanaDialog.add(imagenE,BorderLayout.CENTER);
 			ventanaDialog.add(datos,BorderLayout.EAST);
 			
 			
@@ -211,7 +214,7 @@ public class GUI {
 		JButton b = new JButton("Administrar");
 		b.addActionListener(e->{
 			JDialog ventanaAdmin = new JDialog(ventana,"Administrar");
-			ventanaAdmin.setSize(500,700);
+			ventanaAdmin.setSize(300,200);
 			ventanaAdmin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
 			
@@ -225,7 +228,7 @@ public class GUI {
 			botonera.add(b3);
 		
 			
-			ventanaAdmin.add(botonera,BorderLayout.SOUTH);
+			ventanaAdmin.add(botonera,BorderLayout.CENTER);
 			ventanaAdmin.setVisible(true);
 			
 		});
@@ -250,7 +253,7 @@ public class GUI {
 			ultimaCarta=0;
 			
 		
-			cargarEliminarCarta(ventana, texto);
+			cargarModificarCarta(ventana, texto);
 			
 			//carga la ventana con los pokemones 
 			JButton inicio = inicioModificarCarta(texto, ventana);
@@ -306,7 +309,7 @@ public class GUI {
 	private JButton cartaAModificar(int i, JFrame ventana) {
 		JButton b = new JButton(sistema.verNombreCarta(i));
 		b.addActionListener(e->{
-			
+			sistema.modificarCarta();
 		});
 		return b;
 	}
@@ -433,6 +436,7 @@ public class GUI {
 	private JButton cartaABorrar(int i, JFrame ventana) {
 		JButton b = new JButton(sistema.verNombreCarta(i));
 		b.addActionListener(e->{
+			sistema.eliminarCarta();
 			
 		});
 		return b;

@@ -93,7 +93,7 @@ public class SistemaImplementado implements Sistema{
 	
 	@Override
 	public void eliminarCarta() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	@Override
@@ -107,5 +107,15 @@ public class SistemaImplementado implements Sistema{
 				}
 			}
 		}
+	}
+	@Override
+	public String verImagen(int i) {
+		
+		return cartas.get(i).getRutaImagen();
+	}
+	@Override
+	public void modificarCarta() {
+		// TODO Auto-generated method stub
+		
 	}
 }

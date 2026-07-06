@@ -67,8 +67,10 @@ public interface Sistema {
 	void odenarCartasPoder();
 	
 	void eliminarCarta();
+	void modificarCarta();
 	void ordenarCartasNombre();
 	void calcularPoder();
 	void agregarImagen();
+	String verImagen(int i);
 
 }
